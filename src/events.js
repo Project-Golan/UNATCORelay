@@ -182,6 +182,15 @@ function issueInfo(info, issu)
    return outp;
 }
 
+function commitMsg(repo, commit)
+{
+   const shorthash = commit.id.substring(0, 7);
+   const uri  = struri(`${repo.uri}/commit/${commit.id}`);
+   const msg  = esc(clipstr(commit.message.split(/\r?\n/)[0], 64));
+   const name = esc(commit.author.name);
+   return `${uristr(`\`${shorthash}\``, uri)} ${msg} - *${name}*\n`;
+}
+
 export default class Events
 {
    static commit_comment(info)
@@ -355,14 +364,20 @@ export default class Events
       const s = info.commits.length != 1 ? "s" : "";
 
       let commits = "";
-      for (let commit of info.commits) {
-         if(commits.length > 1000) break;
-         const shorthash = commit.id.substring(0, 7);
-         const uri  = struri(`${repo.uri}/commit/${commit.id}`);
-         const msg  = esc(clipstr(commit.message.split(/\r?\n/)[0], 64));
-         const name = esc(commit.author.name);
-         commits += `${uristr(`\`${shorthash}\``, uri)} ${msg} - *${name}*\n`;
+      if(info.commits.length >= 10)
+      {
+         let omitted = info.commits.length - 8;
+
+         for(let i = 0; i < 4; i++)
+            commits += commitMsg(repo, info.commits[i]);
+
+         commits += `(*${omitted} more commits*)\n`;
+
+         for(let i = omitted + 4; i < info.commits.length; i++)
+            commits += commitMsg(repo, info.commits[i]);
       }
+      else for(let i = 0; i < info.commits.length; i++)
+         commits += commitMsg(repo, info.commits[i]);
 
       const uri = info.compare;
 
