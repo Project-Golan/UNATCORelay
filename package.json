@@ -1,0 +1,44 @@
+{
+   "name": "UNATCORelay",
+   "version": "1.0.0",
+   "description": "A Discord webhook generator for GitHub.",
+   "main": "build/bundle.js",
+   "scripts": {
+      "test": "echo \"No tests\"",
+      "build": "./node_modules/.bin/rollup -c",
+      "start": "npm run build && node build/bundle.js"
+   },
+   "engines": {
+      "node": "6.5.0"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Project-Golan/UNATCORelay.git"
+   },
+   "keywords": [
+      "Discord",
+      "GitHub"
+   ],
+   "contributors": [
+      "Dylan Falconer <me@falconerd.com> (http://falconerd.com)",
+      "Project Golan (http://greyserv.net)"
+   ],
+   "license": "MIT",
+   "bugs": {
+      "url": "https://github.com/Project-Golan/UNATCORelay/issues"
+   },
+   "homepage": "https://github.com/Project-Golan/UNATCORelay#readme",
+   "dependencies": {
+      "buffer-equal-constant-time": "^1.0.1",
+      "body-parser": "^1.9.2",
+      "crypto-js": "^3.1.8",
+      "express": "^4.14.0",
+      "request": "^2.74.0",
+      "rollup": "^0.35.11",
+      "merge": "^1.2.0",
+      "urijs": "^1.18.2"
+   },
+   "devDependencies": {
+      "rollup": "^0.35.11"
+   }
+}
