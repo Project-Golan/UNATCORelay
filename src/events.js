@@ -33,7 +33,7 @@ function struri(str)
 
 function uristr(name, uri)
 {
-   return "[" + esc(name) + "](" + struri(uri) + ")";
+   return "[" + name + "](" + struri(uri) + ")";
 }
 
 function clipstr(str, amt)
