@@ -9,11 +9,14 @@ and pull requests if you need features added.
 
 ## Environment Configuration
 
-- `PORT`: Port to host on. Required.
+- `WEBHOOK_PORT`: Port to host on. Required.
 - `WEBHOOK_URI`: URI for the webhook to send to. Required.
 - `GITHUB_SECRET`: Secret key for validating requests. Not required, but *heavily recommended*.
 - `VHOST`: Virtual host to respond from. Recommended if you use your own subdomain.
 
 ### Example
 
-`WEBHOOK_URI='https://canary.discordapp.com/api/webhooks/whatever' GITHUB_SECRET='whatever' VHOST='whatever.wherever.com' PORT=6666 npm run start`
+```
+npm update
+WEBHOOK_PORT=80 WEBHOOK_URI='https://canary.discordapp.com/api/webhooks/whatever' GITHUB_SECRET='whatever' VHOST='whatever.wherever.com' npm run start
+```
