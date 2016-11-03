@@ -358,10 +358,17 @@ export default class Events
 
    static push(info)
    {
+      if(info.created || info.deleted)
+         return;
+
       const repo = prsRepoInfo(info);
       const send = prsSendInfo(info);
       const name = `${repo.shortname}/${info.ref.split("/")[2]}`;
       const s = info.commits.length != 1 ? "s" : "";
+      const parm = "";
+
+      if(info.forced)
+         parm = "(force pushed)";
 
       let commits = "";
       if(info.commits.length >= 10)
@@ -383,7 +390,8 @@ export default class Events
 
       sendMessage(null, [merge(true,
          author(send.user, send.uri, send.avatar),
-         embed(`[${name}] ${info.commits.length} new commit${s}`, commits, uri)
+         embed(`[${name}] ${info.commits.length} new commit${s} ${parm}`,
+            commits, uri)
       )]);
    }
 
