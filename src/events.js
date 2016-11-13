@@ -188,7 +188,7 @@ function commitMsg(repo, commit)
    const uri  = struri(`${repo.uri}/commit/${commit.id}`);
    const msg  = esc(clipstr(commit.message.split(/\r?\n/)[0], 64));
    const name = esc(commit.author.name);
-   return `${uristr(`\`${shorthash}\``, uri)} ${msg} - *${name}*\n`;
+   return uristr("`" + shorthash + "`", uri) + ` ${msg} - *${name}*\n`;
 }
 
 export default class Events
